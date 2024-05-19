@@ -33,7 +33,7 @@ public class TradeWebSocketClient implements Retryable {
                         .thenMany(session.receive()
                                 //TODO маппинг в сущности + красивый output
                                 .map(WebSocketMessage::getPayloadAsText)
-                                .doOnNext(message -> System.out.println("Trade message: " + message))
+                                .doOnNext(message -> log.info("Trade message: " + message))
                                 .then())
                         .then())
                 .retryWhen(getRetryStrategy())

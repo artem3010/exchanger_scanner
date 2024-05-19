@@ -35,7 +35,7 @@ public class OrderBookWebSocketClient implements Retryable {
                     Flux<String> in = session.receive()
                             //TODO маппинг в сущности + красивый output + обновление данных
                             .map(WebSocketMessage::getPayloadAsText)
-                            .doOnNext(message -> System.out.println("OrderBook message: " + message));
+                            .doOnNext(message -> log.info("OrderBook message: " + message));
                     return out.thenMany(in).then();
                 })
                 .retryWhen(getRetryStrategy())
