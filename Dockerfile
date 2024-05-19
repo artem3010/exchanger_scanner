@@ -1,9 +1,14 @@
-FROM openjdk:17-oracle AS builder
-LABEL authors="artem"
+# Используем базовый образ с JDK 17
+FROM openjdk:17-jdk-oracle
+
+# Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
 
-CMD ["./gradlew", "clean", "bootJar"]
-
+# Копируем сначала только файл с зависимостями для ускорения процесса сборки Docker
 COPY build/libs/*.jar app.jar
 
+# По умолчанию, Spring Boot приложение настраивается на порт 8080
+EXPOSE 8080
+
+# Команда для запуска приложения в контейнере
 CMD ["java", "-jar", "app.jar"]
