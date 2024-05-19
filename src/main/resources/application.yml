@@ -1,0 +1,3 @@
+spring.application.name: exchanger_scanner
+bybitDomain: wss://stream.bybit.com
+apiConfig: /v5/public/linear
